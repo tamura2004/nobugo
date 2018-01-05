@@ -7,13 +7,12 @@ import (
 	//	"math/rand"
 	"github.com/olekukonko/tablewriter"
 	"github.com/tamura2004/nobugo/deck"
-	"github.com/tamura2004/nobugo/samurai"
 )
 
 type Phase int
 
 const (
-	Prepare Phase = iota
+	Prepare Phase = iota + 1
 	March
 	Employ
 	Battle
@@ -53,31 +52,27 @@ func (p *Phase) Next() {
 }
 
 type Game struct {
+	turn int
 	Phase
-	turn          int
-	currentPlayer int
-	Players       deck.Deck
-	jikisanDeck   deck.Deck
+	Players     deck.Deck
+	SamuraiDeck deck.Deck
+	CastleDeck  deck.Deck
 }
 
-func (g *Game) Println() {
+func (g *Game) PrintTable() {
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetHeader([]string{"ターン", "フェイズ", "手番プレイヤー"})
 	table.Append([]string{
 		fmt.Sprintf("%d", g.turn),
 		g.Phase.String(),
-		g.Players[0].Name(),
+		g.SamuraiDeck[0].String(),
 	})
 	table.Render()
 }
 
-func (g *Game) NewPlayers(n int) {
-	g.Players = g.jikisanDeck[:n]
-}
-
 func New() Game {
-	g := Game{}
-	g.turn = 1
-	g.jikisanDeck = samurai.NewJikisanDeck()
-	return g
+	return Game{
+		Phase: Prepare,
+		turn:  1,
+	}
 }
