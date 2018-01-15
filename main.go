@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/tamura2004/nobugo/game"
 	"math/rand"
 	"time"
 )
@@ -10,6 +11,7 @@ func init() {
 }
 
 func main() {
-	for game.Next() {
+	g := game.New()
+	for g.Next() {
 	}
 }
