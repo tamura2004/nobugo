@@ -2,10 +2,9 @@ package castle
 
 import (
 	"github.com/tamura2004/nobugo/castle/area"
-	"github.com/tamura2004/nobugo/tool/list"
 )
 
-type Castles list.List
+type Castles []Castle
 
 func Deck() Castles {
 	return Castles{
@@ -36,9 +35,9 @@ func Deck() Castles {
 	}
 }
 
-func (sd Castles) Get(i int) Castle {
-	if s, ok := sd[i].(Castle); ok {
-		return s
+func (cd Castles) Value() (a []string) {
+	for _, c := range cd {
+		a = append(a, c.Name)
 	}
-	panic("not castle")
+	return a
 }

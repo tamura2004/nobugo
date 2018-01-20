@@ -2,45 +2,42 @@ package player
 
 import (
 	"fmt"
+	"strconv"
 
 	. "github.com/tamura2004/nobugo/player/color"
-	. "github.com/tamura2004/nobugo/player/pool"
+	"github.com/tamura2004/nobugo/player/pool"
 
 	"github.com/tamura2004/nobugo/castle"
 	"github.com/tamura2004/nobugo/samurai"
-	"github.com/tamura2004/nobugo/table"
-	"github.com/tamura2004/nobugo/ui/mock"
 )
 
 type Player struct {
 	Color    Color
-	Pool     Pool
+	Pool     pool.Pool
 	Active   bool
-	Samurais Samurais
-	Castles  Castles
+	Samurais samurai.Samurais
+	Castles  castle.Castles
 }
 
-var num int = func() int {
-	ui.MsgBox("信長さんの野望")
-	return ui.InputNumber("プレイヤー人数？", 3, 6)
-}()
-
-var player Players
-
-func init() {
-	player.Num = num
-	player.Deck = make([]*Player, num)
-	for i := 0; i < num; i++ {
-		player.Deck[i] = &Player{
-			Color: Color(i),
-			Owner: Owner(i + 1),
-			Pool:  Pool{},
-		}
+func New(i int) Player {
+	return Player{
+		Color: Color(i),
 	}
 }
 
-func (p *Player) playerName() []string {
-	if player.Deck[player.Active].Owner == p.Owner {
+func (p *Player) Prepare() {
+	i := len(p.Samurais)
+	j := len(p.Castles)
+
+	if i < j {
+		p.Pool.Num = 3 + i
+	} else {
+		p.Pool.Num = 3 + j
+	}
+}
+
+func (p *Player) Name() []string {
+	if p.Active {
 		return []string{fmt.Sprintf("手番 -> %s", p.Color.String())}
 	}
 	return []string{p.Color.String()}
@@ -48,21 +45,8 @@ func (p *Player) playerName() []string {
 
 func (p *Player) Value() map[string][]string {
 	return map[string][]string{
-		"プレイヤー": p.playerName(),
-		"ダイス":   {fmt.Sprint(p.Pool.Num)},
-		"武将":    p.playerSamurai(),
+		"プレイヤー": p.Name(),
+		"ダイス":   {strconv.Itoa(p.Pool.Num)},
+		"武将":    p.Samurais.Values(),
 	}
-}
-
-func (ps *Players) Values() []map[string][]string {
-	ret := []map[string][]string{}
-	for _, p := range player.Deck {
-		ret = append(ret, p.Value())
-	}
-	return ret
-}
-
-func PrintPlayer() {
-	fmt.Println("\n---- プレイヤー一覧 ----")
-	table.Render(&player, []string{"プレイヤー", "ダイス", "武将"})
 }

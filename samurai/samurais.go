@@ -2,10 +2,9 @@ package samurai
 
 import (
 	"github.com/tamura2004/nobugo/samurai/ability"
-	"github.com/tamura2004/nobugo/tool/list"
 )
 
-type Samurais list.List
+type Samurais []Samurai
 
 func Deck() Samurais {
 	return Samurais{
@@ -31,9 +30,16 @@ func Deck() Samurais {
 	}
 }
 
-func (sd Samurais) Get(i int) Samurai {
-	if s, ok := sd[i].(Samurai); ok {
-		return s
+func (sd Samurais) Values() (a []string) {
+	for _, s := range sd {
+		a = append(a, s.Name)
 	}
-	panic("not samurai")
+	return a
+}
+
+func (sd *Samurais) Draw(i int) (y Samurais) {
+	x := *sd
+	x, y = x[i:], x[:i]
+	*sd = x
+	return
 }

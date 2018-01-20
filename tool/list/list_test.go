@@ -3,18 +3,31 @@ package list_test
 import (
 	"fmt"
 	"github.com/tamura2004/nobugo/tool/list"
+	"strconv"
 	"testing"
 )
+
+type element int
+
+func (e element) String() string {
+	return strconv.Itoa(int(e))
+}
+
+func (e element) Value() []string {
+	return []string{
+		e.String(),
+	}
+}
 
 func ExamplePutNormal() {
 	var ol list.List
 	ol = list.New()
 
-	ol.Put(1)
-	ol.Put(2)
-	ol.Put(3)
-	ol.Put(2)
-	ol.Put(1)
+	ol.Put(element(1))
+	ol.Put(element(2))
+	ol.Put(element(3))
+	ol.Put(element(2))
+	ol.Put(element(1))
 
 	fmt.Printf("%v", ol)
 	// Output:
@@ -25,13 +38,14 @@ func ExamplePutReverse() {
 	var ol list.List
 	ol = list.New()
 
-	ol.Put(1)
-	ol.Put(2)
-	ol.Put(3)
-	ol.Put(2)
-	ol.Put(1)
+	ol.Put(element(1))
+	ol.Put(element(2))
+	ol.Put(element(3))
+	ol.Put(element(2))
+	ol.Put(element(1))
 
-	fmt.Printf("%v", ol.Reverse())
+	ol.Reverse()
+	fmt.Printf("%v", ol)
 	// Output:
 	// [1 2 3]
 }
@@ -39,7 +53,7 @@ func ExamplePutReverse() {
 func TestShuffle(t *testing.T) {
 	ol := list.New()
 	for i := 0; i < 100; i++ {
-		ol.Put(i)
+		ol.Put(element(i))
 	}
 
 	before := ol

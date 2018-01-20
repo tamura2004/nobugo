@@ -1,19 +1,27 @@
 package player
 
-type Players struct {
-	Num    int
-	Active int
-	Deck   []Player
+import (
+	"fmt"
+	"github.com/tamura2004/nobugo/table"
+)
+
+type Players []Player
+
+func Setup(num int) (ps Players) {
+	for i := 0; i < num; i++ {
+		ps = append(ps, New(i))
+	}
+	return ps
 }
 
-func Deck() (p Players) {
-	num := ui.InputNumber("プレイヤー人数？", 3, 6)
-
-	p.Num = num
-	p.Deck = make([]Player, num)
-	for i := 0; i < num; i++ {
-
-		p.Deck[i] = Player{}
+func (ps Players) Table() (table []map[string][]string) {
+	for i := 0; i < len(ps); i++ {
+		table = append(table, ps[i].Value())
 	}
+	return table
+}
 
+func (ps Players) Print() {
+	fmt.Println("\n---- プレイヤー一覧 ----")
+	table.Render(ps, []string{"プレイヤー", "ダイス", "武将"})
 }

@@ -99,7 +99,7 @@ func PrintAction() {
 		} else {
 			data[0][i+1] = "合戦"
 		}
-		data[1][i+1] = fmt.Sprint(i)
+		data[1][i+1] = strconv.Itoa(i)
 
 		if i < 2 {
 			if s := a.Samurai(); s != nil {

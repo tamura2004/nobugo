@@ -1,10 +1,10 @@
 package board
 
 import (
-	"fmt"
 	"github.com/tamura2004/nobugo/castle"
 	"github.com/tamura2004/nobugo/game/board/box"
 	"github.com/tamura2004/nobugo/samurai"
+	"strconv"
 )
 
 type Board struct {
@@ -28,13 +28,13 @@ func New() Board {
 	bx := [6]box.Box{}
 
 	for i := 0; i < 6; i++ {
-		no[i] = fmt.Sprint(i + 1)
+		no[i] = strconv.Itoa(i + 1)
 		if i < 2 {
 			name[i] = "行軍"
-			card[i] = sd.Get(i)
+			card[i] = sd[i]
 		} else {
 			name[i] = "合戦"
-			card[i] = cd.Get(i - 2)
+			card[i] = cd[i-2]
 		}
 		bx[i] = box.New()
 	}
@@ -47,7 +47,7 @@ func New() Board {
 	}
 }
 
-func (b Board) Value(i int) map[string][]string {
+func (b Board) Row(i int) map[string][]string {
 	return map[string][]string{
 		"アクション": {b.No[i], b.Name[i]},
 		"カード":   b.Card[i].Value(),
@@ -55,10 +55,10 @@ func (b Board) Value(i int) map[string][]string {
 	}
 }
 
-func (b Board) Values() []map[string][]string {
+func (b Board) Table() []map[string][]string {
 	v := [6]map[string][]string{}
 	for i := 0; i < 6; i++ {
-		v[i] = b.Value(i)
+		v[i] = b.Row(i)
 	}
 	return v[:]
 }

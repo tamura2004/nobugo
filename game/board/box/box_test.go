@@ -44,12 +44,13 @@ func ExampleReverse() {
 	b.Bid(RED, 5)
 	b.Bid(GREEN, 7)
 
-	fmt.Println(b.Reverse())
+	b.Reverse()
+	fmt.Println(b.Value())
 	// Output:
-	// [緑 赤 青]
+	// [緑:7 赤:5 青:3]
 }
 
-func ExampleValue() {
+func ExampleDetail() {
 	b := box.New()
 	b.Bid(BLUE, 3)
 	b.Bid(RED, 5)

@@ -23,3 +23,13 @@ func (i Color) String() string {
 	}
 	return name[index[i]:index[i+1]]
 }
+
+func (c Color) Title() string {
+	return c.String()
+}
+
+func (c Color) Detail() []string {
+	return []string{
+		c.String(),
+	}
+}

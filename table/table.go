@@ -7,7 +7,7 @@ import (
 )
 
 type Tabulated interface {
-	Values() []map[string][]string
+	Table() []map[string][]string
 }
 
 func Render(t Tabulated, keys []string) {
@@ -38,10 +38,10 @@ func setRows(t Tabulated, data *[][]string, k string) {
 }
 
 func makeRow(t Tabulated, ypos int, k string) ([]string, bool) {
-	row := make([]string, len(t.Values())+1)
+	row := make([]string, len(t.Table())+1)
 	row[0] = k
 	empty := true
-	for col, vmap := range t.Values() {
+	for col, vmap := range t.Table() {
 		if ypos < len(vmap[k]) {
 			row[col+1] = vmap[k][ypos]
 			empty = false

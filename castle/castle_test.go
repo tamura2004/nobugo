@@ -22,7 +22,7 @@ func ExampleValue() {
 
 func TestDeck(t *testing.T) {
 	cs := Deck()
-	got := cs.Get(0).Country
+	got := cs[0].Country
 	want := "羅馬"
 	if got != want {
 		t.Error("bad new castle")

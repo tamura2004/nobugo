@@ -5,28 +5,25 @@ import (
 	"math/rand"
 )
 
-type List []interface{}
+type List []Element
+
+type Element interface {
+	Title() string
+	Detail() []string
+}
 
 func New() List {
 	return List{}
 }
 
-func (ol *List) Put(el interface{}) {
+func (ol *List) Put(el Element) {
 	if ix := ol.find(el); ix != -1 {
 		ol.Delete(ix)
 	}
 	*ol = append(*ol, el)
 }
 
-func (ol List) Reverse() List {
-	list := make(List, len(ol))
-	for i, e := range ol {
-		list[len(ol)-i-1] = e
-	}
-	return list
-}
-
-func (ol *List) find(el interface{}) int {
+func (ol *List) find(el Element) int {
 	for i, e := range *ol {
 		if el == e {
 			return i
@@ -35,7 +32,7 @@ func (ol *List) find(el interface{}) int {
 	return -1
 }
 
-func (ol *List) Delete(ix int) interface{} {
+func (ol *List) Delete(ix int) Element {
 	if ix < 0 || len(*ol) <= ix {
 		fmt.Printf("out of range, ix = %v\n", ix)
 		return nil
@@ -44,6 +41,14 @@ func (ol *List) Delete(ix int) interface{} {
 	e := (*ol)[ix]
 	*ol = append((*ol)[:ix], (*ol)[ix+1:]...)
 	return e
+}
+
+func (ol *List) Reverse() {
+	a := *ol
+	n := len(a)
+	for i, j := 0, n-1; i < j; i, j = i+1, j-1 {
+		a[i], a[j] = a[j], a[i]
+	}
 }
 
 func (ol *List) Shuffle() {
