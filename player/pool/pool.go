@@ -2,6 +2,7 @@ package pool
 
 import (
 	"fmt"
+	"github.com/tamura2004/nobugo/ui"
 	"math/rand"
 	"strconv"
 )
@@ -27,6 +28,18 @@ func (p *Pool) Roll() {
 		p.Dice[d6()]++
 	}
 	p.Rolled = true
+}
+
+func (p *Pool) Select() (int, int) {
+	items, vals := p.Selection()
+	var ix int
+	if len(items) > 1 {
+		ix = ui.SelectNumber("select use dice", items)
+	} else {
+		ui.Pause(items[0])
+		ix = 1
+	}
+	return vals[ix-1][0], vals[ix-1][1]
 }
 
 //

@@ -5,7 +5,6 @@ import (
 	"github.com/tamura2004/nobugo/game/board"
 	. "github.com/tamura2004/nobugo/player/color"
 	"github.com/tamura2004/nobugo/player/pool"
-	"github.com/tamura2004/nobugo/ui"
 
 	"github.com/tamura2004/nobugo/castle"
 	"github.com/tamura2004/nobugo/samurai"
@@ -30,39 +29,34 @@ func New(i int) *Player {
 	}
 }
 
-func (p *Player) Prepare() {
-	i := len(p.Samurais)
-	j := len(p.Castles)
-
+func max(i, j int) int {
 	if i < j {
-		p.Pool.Num = 3 + i
+		return i
 	} else {
-		p.Pool.Num = 3 + j
+		return j
 	}
 }
 
+func (p *Player) Prepare() {
+	i := len(p.Samurais)
+	j := len(p.Castles)
+	p.Pool.Num = 3 + max(i, j)
+}
+
 func (p *Player) March() {
-	if p.Pool.Num == 0 {
+	fmt.Printf("行軍フェイズ：%s\n", p.Name())
+
+	if p.Pool.Num <= 0 {
 		return
 	}
-
 	p.Pool.Roll()
 	Print()
 
-	items, vals := p.Pool.Selection()
+	dice, num := p.Pool.Select()
 
-	var ix int
-	if len(items) > 1 {
-		ix = ui.SelectNumber("select use dice", items)
-	} else {
-		ix = 1
-	}
-
-	dice, num := vals[ix-1][0], vals[ix-1][1]
-	board.Stat().Box[dice].Bid(p.Color, num)
+	board.Bid(p.Color, dice, num)
 	p.Pool.Num -= num
 
-	Print()
 	board.Print()
 	p.Pool.Rolled = false
 }

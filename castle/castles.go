@@ -37,7 +37,7 @@ func InitDeck() {
 		New("桜面戸", "金門橋", 1, 1, 0, area.E5),
 		New("紐育", "萬八端島", 3, 4, 5, area.E6),
 	}
-	deck.ShuffleAll()
+	ShuffleAll()
 }
 
 func (cd Castles) Values() (a []string) {
@@ -66,8 +66,7 @@ func DrawOne() (Castle, error) {
 }
 
 // shuffle top num card of deck
-func (cd *Castles) Shuffle(num int) {
-	deck := *cd
+func Shuffle(num int) {
 	for i := 1; i < num-1; i++ {
 		j := rand.Intn(i + 1)
 		deck[i], deck[j] = deck[j], deck[i]
@@ -75,6 +74,6 @@ func (cd *Castles) Shuffle(num int) {
 }
 
 // shuffle top num card of deck
-func (cd *Castles) ShuffleAll() {
-	cd.Shuffle(len(*cd))
+func ShuffleAll() {
+	Shuffle(len(deck))
 }

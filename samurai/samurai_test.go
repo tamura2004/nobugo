@@ -45,3 +45,14 @@ func TestDrawError(t *testing.T) {
 		t.Errorf("bad draw %v", got)
 	}
 }
+
+func TestDrawOne(t *testing.T) {
+	samurai.InitDeck()
+	got, _ := samurai.DrawOne()
+
+	want := 1
+
+	if got != want {
+		t.Errorf("bad draw %v", dr)
+	}
+}

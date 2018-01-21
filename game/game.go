@@ -44,20 +44,23 @@ func (g *Game) Next() bool {
 		board.Print()
 		g.Step = MARCH
 		return true
+
 	case MARCH:
 		player.March()
 		g.Step = EMPLOY
 		return true
+
 	case EMPLOY:
 		player.Employ()
 		g.Step = BATTLE
 		return true
+
 	case BATTLE:
 		player.Battle()
 		g.Step = CHECK
 		return true
+
 	case CHECK:
-		player.Print()
 		g.Turn++
 		fmt.Printf("\n\n---- %d turn end ----\n\n", g.Turn)
 		ui.Pause("press enter >")

@@ -13,7 +13,7 @@ func TestWiner(t *testing.T) {
 	b = box.New()
 
 	b.Bid(BLUE, 3)
-	b.Bid(RED, 5)
+	b.Bid(RED, 6)
 	b.Bid(BLUE, 3)
 
 	got := b.Winer()
@@ -21,33 +21,6 @@ func TestWiner(t *testing.T) {
 	if got != want {
 		t.Errorf("bad winner, got %v want %v", got, want)
 	}
-}
-
-func ExampleNormal() {
-	var b box.Box
-	b = box.New()
-
-	b.Bid(BLUE, 3)
-	b.Bid(RED, 5)
-	b.Bid(GREEN, 7)
-
-	fmt.Println(b.List)
-	// Output:
-	// [青 赤 緑]
-}
-
-func ExampleReverse() {
-	var b box.Box
-	b = box.New()
-
-	b.Bid(BLUE, 3)
-	b.Bid(RED, 5)
-	b.Bid(GREEN, 7)
-
-	b.Reverse()
-	fmt.Println(b.Value())
-	// Output:
-	// [緑:7 赤:5 青:3]
 }
 
 func ExampleDetail() {

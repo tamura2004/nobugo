@@ -28,8 +28,6 @@ func Prepare() {
 }
 
 func March() {
-	fmt.Print("here?")
-
 	for DiceRemain() {
 		for i := 0; i < len(pl); i++ {
 			pl[i].March()

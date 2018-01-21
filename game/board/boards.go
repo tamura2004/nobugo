@@ -71,6 +71,10 @@ func Prepare() {
 	}
 }
 
+func Bid(c Color, dice, num int) {
+	board.Box[dice].Bid(c, num)
+}
+
 func Winer(i int) Color {
 	return board.Box[i].Winer()
 }

@@ -37,20 +37,12 @@ func InitDeck() {
 		New("足利義昭", 1, 0, 0, ability.DELETE_DICE),
 		New("大友宗麟", 1, 4, 0, ability.CHANGE_AREA),
 	}
-	deck.Shuffle(6)
-}
-
-func (sd Samurais) Values() (a []string) {
-	for _, s := range sd {
-		a = append(a, s.Name)
-	}
-	return a
+	Shuffle(6)
 }
 
 func Draw(num int) (Samurais, error) {
 	var y Samurais
 	if len(deck) < num {
-		panic("samurai deck is empty")
 		return y, errors.New("Samurai deck is empty")
 	}
 	deck, y = deck[num:], deck[:num]
@@ -66,10 +58,20 @@ func DrawOne() (Samurai, error) {
 }
 
 // shuffle top num card of deck
-func (sd *Samurais) Shuffle(num int) {
-	deck := *sd
+func Shuffle(num int) {
 	for i := 1; i < num-1; i++ {
 		j := rand.Intn(i + 1)
 		deck[i], deck[j] = deck[j], deck[i]
 	}
+}
+
+func ShuffleAll() {
+	Shuffle(len(deck))
+}
+
+func (sd Samurais) Values() (a []string) {
+	for _, s := range sd {
+		a = append(a, s.Name)
+	}
+	return a
 }
