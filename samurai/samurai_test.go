@@ -15,15 +15,6 @@ func ExampleNew() {
 	// {家康 [1]/[2]->[3]}
 }
 
-func ExampleGet() {
-	sd := samurai.Deck()
-	s := sd[0]
-
-	fmt.Printf("%v", s)
-	// Output:
-	// {弥助 [1]/[2]->[6]}
-}
-
 func ExampleValue() {
 	s := samurai.New("家康", 1, 2, 3, ability.CHANGE_DICE)
 

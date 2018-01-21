@@ -3,6 +3,7 @@ package pool
 import (
 	"fmt"
 	"math/rand"
+	"strconv"
 )
 
 // Poolはダイスの数と振った結果を保有する
@@ -26,6 +27,35 @@ func (p *Pool) Roll() {
 		p.Dice[d6()]++
 	}
 	p.Rolled = true
+}
+
+//
+func (p *Pool) Selection() ([]string, [][2]int) {
+	items := []string{}
+	vals := [][2]int{} // dice and value
+	j := 0
+
+	for i := 0; i < 6; i++ {
+		if p.Dice[i] > 0 {
+			items = append(items, fmt.Sprintf("use [%d]", i+1))
+			vals = append(vals, [2]int{i, p.Dice[i]})
+			j++
+		}
+	}
+
+	return items, vals
+}
+
+func (p *Pool) Value() []string {
+	if p.Rolled {
+		return []string{
+			p.String(),
+		}
+	} else {
+		return []string{
+			strconv.Itoa(p.Num),
+		}
+	}
 }
 
 func (p *Pool) String() string {

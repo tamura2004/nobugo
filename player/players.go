@@ -7,11 +7,38 @@ import (
 
 type Players []Player
 
-func Setup(num int) (ps Players) {
+var pl Players
+
+func Setup(num int) {
+	pl = make(Players, num)
 	for i := 0; i < num; i++ {
-		ps = append(ps, New(i))
+		pl[i] = New(i)
 	}
-	return ps
+}
+
+func Prepare() {
+	for i := 0; i < len(pl); i++ {
+		pl[i].Prepare()
+	}
+}
+
+func March() {
+	fmt.Print("here?")
+
+	for DiceRemain() {
+		for i := 0; i < len(pl); i++ {
+			pl[i].March()
+		}
+	}
+}
+
+func DiceRemain() bool {
+	for i := 0; i < len(pl); i++ {
+		if pl[i].Pool.Num > 0 {
+			return true
+		}
+	}
+	return false
 }
 
 func (ps Players) Table() (table []map[string][]string) {
@@ -21,7 +48,7 @@ func (ps Players) Table() (table []map[string][]string) {
 	return table
 }
 
-func (ps Players) Print() {
+func Print() {
 	fmt.Println("\n---- プレイヤー一覧 ----")
-	table.Render(ps, []string{"プレイヤー", "ダイス", "武将"})
+	table.Render(pl, []string{"プレイヤー", "ダイス", "武将"})
 }

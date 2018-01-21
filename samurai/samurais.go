@@ -2,12 +2,24 @@ package samurai
 
 import (
 	"github.com/tamura2004/nobugo/samurai/ability"
+	"math/rand"
+	"time"
 )
 
 type Samurais []Samurai
 
-func Deck() Samurais {
-	return Samurais{
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
+
+var deck *Samurais
+
+func Deck() *Samurais {
+	if deck != nil {
+		return deck
+	}
+
+	deck = &Samurais{
 		New("弥助", 1, 2, 6, ability.CHANGE_DICE),
 		New("木下藤吉郎", 3, 4, 1, ability.CHANGE_DICE),
 		New("明智光秀", 5, 6, 1, ability.CHANGE_DICE),
@@ -28,6 +40,8 @@ func Deck() Samurais {
 		New("足利義昭", 1, 0, 0, ability.DELETE_DICE),
 		New("大友宗麟", 1, 4, 0, ability.CHANGE_AREA),
 	}
+	deck.Shuffle(6)
+	return deck
 }
 
 func (sd Samurais) Values() (a []string) {
@@ -37,9 +51,20 @@ func (sd Samurais) Values() (a []string) {
 	return a
 }
 
-func (sd *Samurais) Draw(i int) (y Samurais) {
+func (sd *Samurais) Draw(num int) (y Samurais) {
+	if sd == nil {
+		panic("cannot draw from nil")
+	}
 	x := *sd
-	x, y = x[i:], x[:i]
-	*sd = x
-	return
+	*sd, y = x[num:], x[:num]
+	return y
+}
+
+// shuffle top num card of deck
+func (sd *Samurais) Shuffle(num int) {
+	deck := *sd
+	for i := 1; i < num-1; i++ {
+		j := rand.Intn(i + 1)
+		deck[i], deck[j] = deck[j], deck[i]
+	}
 }

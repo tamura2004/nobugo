@@ -4,6 +4,7 @@ import (
 	"github.com/tamura2004/nobugo/castle"
 	"github.com/tamura2004/nobugo/game/board/box"
 	"github.com/tamura2004/nobugo/samurai"
+	"github.com/tamura2004/nobugo/table"
 	"strconv"
 )
 
@@ -18,10 +19,9 @@ type Card interface {
 	Value() []string
 }
 
-func New() Board {
-	sd := samurai.Deck()
-	cd := castle.Deck()
+var board *Board
 
+func Init() {
 	no := [6]string{}
 	name := [6]string{}
 	card := [6]Card{}
@@ -31,20 +31,40 @@ func New() Board {
 		no[i] = strconv.Itoa(i + 1)
 		if i < 2 {
 			name[i] = "行軍"
-			card[i] = sd[i]
 		} else {
 			name[i] = "合戦"
-			card[i] = cd[i-2]
 		}
 		bx[i] = box.New()
 	}
 
-	return Board{
+	board = &Board{
 		No:   no,
 		Name: name,
 		Card: card,
 		Box:  bx,
 	}
+}
+
+func Stat() *Board {
+	if board != nil {
+		return board
+	}
+	Init()
+	return board
+}
+
+func Prepare() {
+	for i := 0; i < 6; i++ {
+		if i < 2 {
+			board.Card[i] = samurai.Deck().Draw(1)[0]
+		} else {
+			board.Card[i] = castle.Deck().Draw(1)[0]
+		}
+	}
+}
+
+func Print() {
+	table.Render(board, []string{"アクション", "カード", "ダイス"})
 }
 
 func (b Board) Row(i int) map[string][]string {
