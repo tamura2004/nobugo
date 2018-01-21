@@ -1,6 +1,7 @@
 package game
 
 import (
+	"fmt"
 	"github.com/tamura2004/nobugo/player"
 
 	"github.com/tamura2004/nobugo/game/board"
@@ -45,8 +46,19 @@ func (g *Game) Next() bool {
 		g.Step = EMPLOY
 		return true
 	case EMPLOY:
+		player.Employ()
+		g.Step = BATTLE
+		return true
 	case BATTLE:
+		player.Battle()
+		g.Step = CHECK
+		return true
 	case CHECK:
+		g.Turn++
+		fmt.Printf("\n\n---- %d turn end ----\n\n", g.Turn)
+		ui.Pause("press enter >")
+		g.Step = PREPARE
+		return true
 	}
 
 	return false

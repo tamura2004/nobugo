@@ -19,8 +19,8 @@ type Player struct {
 	castle.Castles
 }
 
-func New(i int) Player {
-	return Player{
+func New(i int) *Player {
+	return &Player{
 		Color:    Color(i),
 		Samurais: samurai.Deck().Draw(1),
 	}
@@ -63,6 +63,14 @@ func (p *Player) March() {
 	p.Pool.Rolled = false
 }
 
+func (p *Player) AddSamurai(s samurai.Samurai) {
+	p.Samurais = append(p.Samurais, s)
+}
+
+func (p *Player) AddCastle(c castle.Castle) {
+	p.Castles = append(p.Castles, c)
+}
+
 func (p *Player) Name() []string {
 	if p.Active {
 		return []string{fmt.Sprintf("手番 -> %s", p.Color.String())}
@@ -75,5 +83,6 @@ func (p *Player) Value() map[string][]string {
 		"プレイヤー": p.Name(),
 		"ダイス":   p.Pool.Value(),
 		"武将":    p.Samurais.Values(),
+		"城":     p.Castles.Values(),
 	}
 }

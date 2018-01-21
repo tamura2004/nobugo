@@ -2,10 +2,11 @@ package player
 
 import (
 	"fmt"
+	"github.com/tamura2004/nobugo/game/board"
 	"github.com/tamura2004/nobugo/table"
 )
 
-type Players []Player
+type Players []*Player
 
 var pl Players
 
@@ -14,6 +15,10 @@ func Setup(num int) {
 	for i := 0; i < num; i++ {
 		pl[i] = New(i)
 	}
+}
+
+func List() Players {
+	return pl
 }
 
 func Prepare() {
@@ -28,6 +33,22 @@ func March() {
 	for DiceRemain() {
 		for i := 0; i < len(pl); i++ {
 			pl[i].March()
+		}
+	}
+}
+
+func Employ() {
+	for i := 0; i < 2; i++ {
+		if w := board.Winer(i); w != -1 {
+			pl[w].AddSamurai(board.GetSamurai(i))
+		}
+	}
+}
+
+func Battle() {
+	for i := 2; i < 6; i++ {
+		if w := board.Winer(i); w != -1 {
+			pl[w].AddCastle(board.GetCastle(i))
 		}
 	}
 }
@@ -50,5 +71,5 @@ func (ps Players) Table() (table []map[string][]string) {
 
 func Print() {
 	fmt.Println("\n---- プレイヤー一覧 ----")
-	table.Render(pl, []string{"プレイヤー", "ダイス", "武将"})
+	table.Render(pl, []string{"プレイヤー", "ダイス", "武将", "城"})
 }

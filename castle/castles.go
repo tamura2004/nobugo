@@ -44,7 +44,7 @@ func Deck() *Castles {
 	return deck
 }
 
-func (cd Castles) Value() (a []string) {
+func (cd Castles) Values() (a []string) {
 	for _, c := range cd {
 		a = append(a, c.Name)
 	}
