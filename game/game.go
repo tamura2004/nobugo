@@ -2,7 +2,9 @@ package game
 
 import (
 	"fmt"
+	"github.com/tamura2004/nobugo/castle"
 	"github.com/tamura2004/nobugo/player"
+	"github.com/tamura2004/nobugo/samurai"
 
 	"github.com/tamura2004/nobugo/game/board"
 	. "github.com/tamura2004/nobugo/game/step"
@@ -27,6 +29,8 @@ func init() {
 
 func New() (g *Game) {
 	board.Init()
+	samurai.InitDeck()
+	castle.InitDeck()
 	num := ui.InputNumber("プレイヤー人数？", 3, 6)
 	player.Setup(num)
 	return &game
@@ -37,11 +41,10 @@ func (g *Game) Next() bool {
 	case PREPARE:
 		player.Prepare()
 		board.Prepare()
+		board.Print()
 		g.Step = MARCH
 		return true
 	case MARCH:
-		player.Print()
-		board.Print()
 		player.March()
 		g.Step = EMPLOY
 		return true
@@ -54,6 +57,7 @@ func (g *Game) Next() bool {
 		g.Step = CHECK
 		return true
 	case CHECK:
+		player.Print()
 		g.Turn++
 		fmt.Printf("\n\n---- %d turn end ----\n\n", g.Turn)
 		ui.Pause("press enter >")

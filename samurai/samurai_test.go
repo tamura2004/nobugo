@@ -24,9 +24,8 @@ func ExampleValue() {
 }
 
 func TestDraw(t *testing.T) {
-	sd := samurai.Deck()
-	n := len(sd)
-	dr := sd.Draw(3)
+	samurai.InitDeck()
+	dr, _ := samurai.Draw(3)
 
 	got := len(dr)
 	want := 3
@@ -34,11 +33,15 @@ func TestDraw(t *testing.T) {
 	if got != want {
 		t.Errorf("bad draw %v", dr)
 	}
+}
 
-	got = len(sd)
-	want = n - 3
-	if got != want {
-		t.Errorf("bad draw %v", dr)
+func TestDrawError(t *testing.T) {
+	samurai.InitDeck()
+	_, got := samurai.Draw(300)
+
+	want := "Samurai deck is empty"
+
+	if got.Error() != want {
+		t.Errorf("bad draw %v", got)
 	}
-
 }

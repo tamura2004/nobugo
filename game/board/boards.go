@@ -55,10 +55,18 @@ func Stat() *Board {
 
 func Prepare() {
 	for i := 0; i < 6; i++ {
+		board.Box[i] = box.New()
+
 		if i < 2 {
-			board.Samurais[i] = samurai.Deck().Draw(1)[0]
+			s, err := samurai.DrawOne()
+			if err == nil {
+				board.Samurais[i] = s
+			}
 		} else {
-			board.Castles[i] = castle.Deck().Draw(1)[0]
+			c, err := castle.DrawOne()
+			if err == nil {
+				board.Castles[i] = c
+			}
 		}
 	}
 }

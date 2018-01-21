@@ -1,20 +1,17 @@
 package castle
 
 import (
+	"errors"
 	"github.com/tamura2004/nobugo/castle/area"
 	"math/rand"
 )
 
 type Castles []Castle
 
-var deck *Castles
+var deck Castles
 
-func Deck() *Castles {
-	if deck != nil {
-		return deck
-	}
-
-	deck = &Castles{
+func InitDeck() {
+	deck = Castles{
 		New("羅馬", "法王庁", 1, 1, 1, area.W6),
 		New("天竺", "東インド会社", 2, 3, 0, area.W5),
 		New("唐", "万里の長城", 6, 0, 0, area.W5),
@@ -41,7 +38,6 @@ func Deck() *Castles {
 		New("紐育", "萬八端島", 3, 4, 5, area.E6),
 	}
 	deck.ShuffleAll()
-	return deck
 }
 
 func (cd Castles) Values() (a []string) {
@@ -51,13 +47,22 @@ func (cd Castles) Values() (a []string) {
 	return a
 }
 
-func (cd *Castles) Draw(num int) (y Castles) {
-	if cd == nil {
-		panic("cannot draw from nil")
+func Draw(num int) (Castles, error) {
+	var y Castles
+	if len(deck) < num {
+		return y, errors.New("Castle deck is empty")
 	}
-	x := *cd
-	*cd, y = x[num:], x[:num]
-	return y
+	deck, y = deck[num:], deck[:num]
+	return y, nil
+}
+
+func DrawOne() (Castle, error) {
+	var y Castle
+	cd, err := Draw(1)
+	if err != nil {
+		return y, err
+	}
+	return cd[0], nil
 }
 
 // shuffle top num card of deck

@@ -20,9 +20,13 @@ type Player struct {
 }
 
 func New(i int) *Player {
+	sd, err := samurai.Draw(1)
+	if err != nil {
+		panic("no samurai card when init player")
+	}
 	return &Player{
 		Color:    Color(i),
-		Samurais: samurai.Deck().Draw(1),
+		Samurais: sd,
 	}
 }
 

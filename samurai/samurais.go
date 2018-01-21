@@ -1,6 +1,7 @@
 package samurai
 
 import (
+	"errors"
 	"github.com/tamura2004/nobugo/samurai/ability"
 	"math/rand"
 	"time"
@@ -12,14 +13,10 @@ func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
-var deck *Samurais
+var deck Samurais
 
-func Deck() *Samurais {
-	if deck != nil {
-		return deck
-	}
-
-	deck = &Samurais{
+func InitDeck() {
+	deck = Samurais{
 		New("弥助", 1, 2, 6, ability.CHANGE_DICE),
 		New("木下藤吉郎", 3, 4, 1, ability.CHANGE_DICE),
 		New("明智光秀", 5, 6, 1, ability.CHANGE_DICE),
@@ -41,7 +38,6 @@ func Deck() *Samurais {
 		New("大友宗麟", 1, 4, 0, ability.CHANGE_AREA),
 	}
 	deck.Shuffle(6)
-	return deck
 }
 
 func (sd Samurais) Values() (a []string) {
@@ -51,13 +47,22 @@ func (sd Samurais) Values() (a []string) {
 	return a
 }
 
-func (sd *Samurais) Draw(num int) (y Samurais) {
-	if sd == nil {
-		panic("cannot draw from nil")
+func Draw(num int) (Samurais, error) {
+	var y Samurais
+	if len(deck) < num {
+		panic("samurai deck is empty")
+		return y, errors.New("Samurai deck is empty")
 	}
-	x := *sd
-	*sd, y = x[num:], x[:num]
-	return y
+	deck, y = deck[num:], deck[:num]
+	return y, nil
+}
+
+func DrawOne() (Samurai, error) {
+	sd, err := Draw(1)
+	if err != nil {
+		return Samurai{}, err
+	}
+	return sd[0], nil
 }
 
 // shuffle top num card of deck
