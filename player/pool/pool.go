@@ -30,6 +30,10 @@ func (p *Pool) Roll() {
 	p.Rolled = true
 }
 
+func (p *Pool) Do(f func(int, int)) {
+	f(p.Select())
+}
+
 func (p *Pool) Select() (int, int) {
 	items, vals := p.Selection()
 	var ix int

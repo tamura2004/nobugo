@@ -52,10 +52,10 @@ func (p *Player) March() {
 	p.Pool.Roll()
 	Print()
 
-	dice, num := p.Pool.Select()
-
-	board.Bid(p.Color, dice, num)
-	p.Pool.Num -= num
+	p.Pool.Do(func(dice, num int) {
+		board.Bid(p.Color, dice, num)
+		p.Pool.Num -= num
+	})
 
 	board.Print()
 	p.Pool.Rolled = false
