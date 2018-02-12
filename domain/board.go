@@ -1,11 +1,11 @@
 package domain
 
-type Board struct {
-	Cols [6]Col
-}
+type Board [6]Box
 
-type Col struct {
-	Box
-	Name string
-	Card
+func NewBoard() Board {
+	board := Board{}
+	for i := 0; i < 6; i++ {
+		board[i] = NewBox(i)
+	}
+	return board
 }

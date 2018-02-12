@@ -1,0 +1,94 @@
+[[Card]]
+Name = "弥助"
+Ability = "CHANGE_DICE"
+Power = [1, 2, 6]
+
+[[Card]]
+Name = "木下藤吉郎"
+Ability = "CHANGE_DICE"
+Power = [3, 4, 1]
+
+[[Card]]
+Name = "明智光秀"
+Ability = "CHANGE_DICE"
+Power = [5, 6, 1]
+
+[[Card]]
+Name = "柴田勝家"
+Ability = "CHANGE_DICE"
+Power = [3, 4, 5]
+
+[[Card]]
+Name = "前田利家"
+Ability = "CHANGE_DICE"
+Power = [5, 6, 3]
+
+[[Card]]
+Name = "滝川一益"
+Ability = "CHANGE_DICE"
+Power = [1, 2, 4]
+
+[[Card]]
+Name = "毛利元就"
+Ability = "CHANGE_DICE"
+Power = [5, 6, 4]
+
+[[Card]]
+Name = "徳川家康"
+Ability = "CHANGE_DICE"
+Power = [3, 4, 2]
+
+[[Card]]
+Name = "今川義元"
+Ability = "CHANGE_DICE"
+Power = [5, 6, 1]
+
+[[Card]]
+Name = "北条氏康"
+Ability = "CHANGE_DICE"
+Power = [1, 2, 3]
+
+[[Card]]
+Name = "島津義弘"
+Ability = "CHANGE_DICE"
+Power = [3, 4, 6]
+
+[[Card]]
+Name = "松永久秀"
+Ability = "CHANGE_SAMURAI"
+Power = []
+
+[[Card]]
+Name = "武田信玄"
+Ability = "ADD_GOLD"
+Power = [1]
+
+[[Card]]
+Name = "上杉謙信"
+Ability = "ADD_BATTLE_DICE"
+Power = [2]
+
+[[Card]]
+Name = "伊達政宗"
+Ability = "CHANGE_AREA"
+Power = [2, 4]
+
+[[Card]]
+Name = "九鬼義隆"
+Ability = "CHANGE_AREA"
+Power = [2, 6]
+
+[[Card]]
+Name = "伊藤マンショ"
+Ability = "CHANGE_AREA"
+Power = [1, 6]
+
+[[Card]]
+Name = "足利義昭"
+Ability = "DELETE_DICE"
+Power = [1]
+
+[[Card]]
+Name = "大友宗麟"
+Ability = "CHANGE_AREA"
+Power = [1, 4]

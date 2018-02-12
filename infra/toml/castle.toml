@@ -1,0 +1,143 @@
+[[Card]]
+Area = "西6"
+Country = "羅馬"
+Name = "法王庁"
+Power = [1, 1, 1]
+
+[[Card]]
+Area = "西5"
+Country = "天竺"
+Name = "東インド会社"
+Power = [2, 3]
+
+[[Card]]
+Area = "西5"
+Country = "唐"
+Name = "万里の長城"
+Power = [6]
+
+[[Card]]
+Area = "西4"
+Country = "琉球"
+Name = "首里城"
+Power = [2]
+
+[[Card]]
+Area = "西4"
+Country = "薩摩"
+Name = "鹿児島城"
+Power = [5]
+
+[[Card]]
+Area = "西3"
+Country = "土佐"
+Name = "高知城"
+Power = [5]
+
+[[Card]]
+Area = "西3"
+Country = "出雲"
+Name = "出雲大社"
+Power = [1, 1]
+
+[[Card]]
+Area = "西2"
+Country = "備前"
+Name = "岡山城"
+Power = [2]
+
+[[Card]]
+Area = "西2"
+Country = "播磨"
+Name = "姫路城"
+Power = [3, 4]
+
+[[Card]]
+Area = "西1"
+Country = "河内"
+Name = "石山本願寺"
+Power = [5]
+
+[[Card]]
+Area = "西1"
+Country = "大和"
+Name = "東大寺"
+Power = [1, 1]
+
+[[Card]]
+Area = "西1"
+Country = "山城"
+Name = "二条城"
+Power = [1, 1, 1]
+
+[[Card]]
+Area = "東1"
+Country = "美濃"
+Name = "稲葉山城"
+Power = [5]
+
+[[Card]]
+Area = "東1"
+Country = "三河"
+Name = "岡崎城"
+Power = [2]
+
+[[Card]]
+Area = "東1"
+Country = "尾張"
+Name = "名古屋城"
+Power = [4]
+
+[[Card]]
+Area = "東2"
+Country = "駿河"
+Name = "駿府城"
+Power = [3]
+
+[[Card]]
+Area = "東2"
+Country = "相模"
+Name = "小田原城"
+Power = [2, 3, 4]
+
+[[Card]]
+Area = "東2"
+Country = "甲斐"
+Name = "躑躅ヶ崎館"
+Power = [5]
+
+[[Card]]
+Area = "東3"
+Country = "越後"
+Name = "春日山城"
+Power = [2, 3]
+
+[[Card]]
+Area = "東3"
+Country = "武蔵"
+Name = "江戸城"
+Power = [3, 4]
+
+[[Card]]
+Area = "東4"
+Country = "出羽"
+Name = "米沢城"
+Power = [3]
+
+[[Card]]
+Area = "東4"
+Country = "蝦夷"
+Name = "五稜郭"
+Power = [5]
+
+[[Card]]
+Area = "東5"
+Country = "桜面戸"
+Name = "金門橋"
+Power = [1, 1]
+
+[[Card]]
+Area = "東6"
+Country = "紐育"
+Name = "萬八端島"
+Power = [3, 4, 5]

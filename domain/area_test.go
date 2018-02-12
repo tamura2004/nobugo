@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestArea(t *testing.T) {
+func TestAreaString(t *testing.T) {
 	cases := []struct {
 		a domain.Area
 		s string
@@ -27,7 +27,36 @@ func TestArea(t *testing.T) {
 	for _, c := range cases {
 		got, want := c.a.String(), c.s
 		if got != want {
-			t.Errorf("wrong string, got %q want %q", got, want)
+			t.Errorf("wrong area to string, got %q want %q", got, want)
+		}
+	}
+}
+
+func TestAreaUnmarshalText(t *testing.T) {
+	cases := []struct {
+		a domain.Area
+		s string
+	}{
+		{domain.W6, "西6"},
+		{domain.W5, "西5"},
+		{domain.W4, "西4"},
+		{domain.W3, "西3"},
+		{domain.W2, "西2"},
+		{domain.W1, "西1"},
+		{domain.E1, "東1"},
+		{domain.E2, "東2"},
+		{domain.E3, "東3"},
+		{domain.E4, "東4"},
+		{domain.E5, "東5"},
+		{domain.E6, "東6"},
+	}
+
+	for _, c := range cases {
+		want, g := c.a, c.s
+		got := domain.Area(0)
+		got.UnmarshalText([]byte(g))
+		if got != want {
+			t.Errorf("wrong string to area, got %q want %q", got, want)
 		}
 	}
 }

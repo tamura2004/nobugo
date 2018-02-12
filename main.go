@@ -1,17 +1,22 @@
 package main
 
 import (
-	"github.com/tamura2004/nobugo/game"
-	"math/rand"
-	"time"
+	"fmt"
+	"github.com/tamura2004/nobugo/domain"
+	"github.com/tamura2004/nobugo/usecase"
 )
 
-func init() {
-	rand.Seed(time.Now().UnixNano())
+type printer struct{}
+
+func (p printer) Print() {
+	fmt.Println("running!")
 }
 
 func main() {
-	g := game.New()
-	for g.Next() {
+	g := usecase.Game{
+		domain.Game{},
+		printer{},
 	}
+
+	g.Run()
 }
