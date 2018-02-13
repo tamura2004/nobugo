@@ -11,11 +11,9 @@ func NewParty(n int) Party {
 		Num:    n,
 		Active: 0,
 	}
-
 	for i := 0; i < n; i++ {
 		party.Player = append(party.Player, NewPlayer(i))
 	}
-
 	return party
 }
 

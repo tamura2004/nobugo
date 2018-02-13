@@ -2,22 +2,25 @@ package infra
 
 import (
 	"fmt"
-
 	"github.com/peterh/liner"
+	"github.com/tamura2004/nobugo/domain"
 )
 
-func Pause(msg string) {
+type UI struct{}
+
+func (UI) Pause(msg string) {
 	l := liner.NewLiner()
 	defer l.Close()
 	l.Prompt(msg)
 }
 
-func MsgBox(msg string) {
-	t := TablePrinter{}
+func (UI) MsgBox(msg string) {
+	t := Table{}
 	t.Print([][]string{{msg}})
 }
 
-func InputNumber(msg string, min, max int) (n int) {
+func (UI) Num(min, max int, msg string) int {
+	var n int
 	for {
 		fmt.Printf("%s(%d-%d)? >", msg, min, max)
 		fmt.Scan(&n)
@@ -27,9 +30,10 @@ func InputNumber(msg string, min, max int) (n int) {
 	}
 }
 
-func SelectNumber(msg string, items []string) (n int) {
-	for i, item := range items {
-		fmt.Printf("%3d: %s\n", i+1, item)
+func (u UI) Select(actions []domain.Action) domain.Action {
+	for i, action := range actions {
+		fmt.Printf("%3d: %s\n", i+1, action.Msg)
 	}
-	return InputNumber(msg, 1, len(items))
+	n := u.Num(1, len(actions), "")
+	return actions[n]
 }

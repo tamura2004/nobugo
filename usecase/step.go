@@ -1,4 +1,4 @@
-package domain
+package usecase
 
 import "strconv"
 
@@ -12,8 +12,9 @@ const (
 	CHECK
 )
 
-func (s Step) Next() Step {
-	return Step((s + 1) % 5)
+func (s *Step) Next() {
+	step = *s
+	*s = Step((step + 1) % 5)
 }
 
 func (i Step) String() string {

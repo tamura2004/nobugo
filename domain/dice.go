@@ -16,3 +16,10 @@ func (d *Dice) Roll() {
 func (d *Dice) Restore() {
 	d.Num = 0
 }
+
+func NewDice(c Color) Dice {
+	return Dice{
+		Num:   1,
+		Color: c,
+	}
+}

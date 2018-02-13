@@ -1,13 +1,17 @@
-package domain_test
+package usecase_test
 
 import (
-	"github.com/tamura2004/nobugo/domain"
+	"github.com/tamura2004/nobugo/usecase"
 	"testing"
 )
 
+var got usecase.Step
+
 func TestStepNext(t *testing.T) {
-	want := domain.PREPARE
-	got := domain.CHECK.Next()
+	want := usecase.PREPARE
+
+	got = usecase.CHECK
+	got.Next()
 
 	if want != got {
 		t.Errorf("bad step next(), got %s want %s", got, want)

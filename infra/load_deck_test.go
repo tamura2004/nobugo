@@ -6,7 +6,7 @@ import (
 )
 
 func ExampleSamuraiDeckLoad() {
-	deck := infra.LoadDeck("toml/samurai.toml")
+	deck := infra.LoadDeck("../config/samurai.toml")
 	card := deck.Draw()
 	pretty.Print(card)
 	// Output:
@@ -21,7 +21,7 @@ func ExampleSamuraiDeckLoad() {
 }
 
 func ExampleCastleDeckLoad() {
-	deck := infra.LoadDeck("toml/castle.toml")
+	deck := infra.LoadDeck("../config/castle.toml")
 	card := deck.Draw()
 	pretty.Print(card)
 	// Output:

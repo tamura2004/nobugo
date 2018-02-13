@@ -5,7 +5,8 @@ import (
 )
 
 func ExampleUiMsgBox() {
-	infra.MsgBox("hello")
+	ui := infra.UI{}
+	ui.MsgBox("hello")
 	// Output:
 	// +-------+
 	// | hello |

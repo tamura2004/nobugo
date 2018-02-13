@@ -1,56 +1,37 @@
 package usecase
 
 import (
-	"github.com/tamura2004/nobugo/domain"
+	"github.com/tamura2004/nobugo/usecase/port"
 )
 
-type Game struct {
-	domain.Game
-}
+var step Step
 
-func (g *Game) Run() {
-	for g.next() {
-		g.Party.Print()
-		g.Board.Print()
+func Run() {
+	open()
+	for next() {
+		port.Party.Print()
+		port.Board.Print()
 	}
-	g.close()
+	close()
 }
 
-func (g *Game) close() {
-}
+func next() bool {
+	switch step {
 
-func (g *Game) next() bool {
-	switch g.Step {
+	case PREPARE:
+		return prepare()
 
-	case domain.PREPARE:
-		g.prepare()
+	case MARCH:
+		march()
 
-	case domain.MARCH:
-		g.march()
+	case EMPLOY:
+		employ()
 
-	case domain.EMPLOY:
-		g.employ()
+	case BATTLE:
+		battle()
 
-	case domain.BATTLE:
-		g.battle()
-
-	case domain.CHECK:
-		g.check()
+	case CHECK:
+		check()
 	}
 	return false
-}
-
-func (g *Game) prepare() {
-}
-
-func (g *Game) march() {
-}
-
-func (g *Game) employ() {
-}
-
-func (g *Game) battle() {
-}
-
-func (g *Game) check() {
 }

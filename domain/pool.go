@@ -23,3 +23,11 @@ func (p Pool) Restore() {
 		p[i].Restore()
 	}
 }
+
+func NewPool(c Color, n int) Pool {
+	pool := Pool{}
+	for i := 0; i < n; i++ {
+		pool = append(pool, NewDice(c))
+	}
+	return pool
+}

@@ -6,7 +6,7 @@ import (
 )
 
 func ExampleTablePrint() {
-	var p infra.TablePrinter
+	var p infra.Table
 
 	data := [][]string{
 		{"a", "b", "c"},
