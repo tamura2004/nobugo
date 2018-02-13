@@ -6,8 +6,6 @@ import (
 
 type Game struct {
 	domain.Game
-	Party
-	Board
 }
 
 func (g *Game) Run() {
