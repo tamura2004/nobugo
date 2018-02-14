@@ -30,10 +30,10 @@ func (UI) Num(min, max int, msg string) int {
 	}
 }
 
-func (u UI) Select(actions []domain.Action) domain.Action {
+func (u UI) Select(actions []domain.Action) {
 	for i, action := range actions {
 		fmt.Printf("%3d: %s\n", i+1, action.Msg)
 	}
 	n := u.Num(1, len(actions), "")
-	return actions[n]
+	actions[n].Do()
 }

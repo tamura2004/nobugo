@@ -12,7 +12,16 @@ const (
 	CHECK
 )
 
-func (s *Step) Next() {
+var actions = map[Step]func(){
+	PREPARE: prepare,
+	MARCH:   march,
+	EMPLOY:  employ,
+	BATTLE:  battle,
+	CHECK:   check,
+}
+
+func (s *Step) next() {
+	actions[*s]()
 	step = *s
 	*s = Step((step + 1) % 5)
 }

@@ -6,6 +6,8 @@ type Party struct {
 	Player []Player
 }
 
+type Work func(*Player)
+
 func NewParty(n int) Party {
 	party := Party{
 		Num:    n,
@@ -17,42 +19,35 @@ func NewParty(n int) Party {
 	return party
 }
 
-func (p *Party) Each(f func(p *Player)) {
+func (p *Party) Each(f Work) {
 	for i := 0; i < p.Num; i++ {
 		f(&p.Player[i])
 	}
 }
 
-func (p *Party) Recover() {
-	p.Each(func(pl *Player) {
-		pl.Recover()
-	})
+func (p *Party) EachHasDice(f Work) {
+	for pl := p.TurnPlayer(); p.Done(); p.Next() {
+		if pl.NoDice() {
+			continue
+		}
+		f(pl)
+	}
+}
+
+func (p *Party) TurnPlayer() *Player {
+	return &p.Player[p.Active]
 }
 
 func (p *Party) Done() bool {
-	for i := 0; i < p.Num; i++ {
-		if !p.Player[i].Done {
-			return false
+	flag := true
+	p.Each(func(p *Player) {
+		if p.HasDice() {
+			flag = false
 		}
-	}
-	return true
-}
-
-func (p *Party) ActivePlayer() Player {
-	return p.Player[p.Active]
+	})
+	return flag
 }
 
 func (p *Party) Next() {
-	if p.Done() {
-		return
-	}
-
-	i := p.Active
-
-	for {
-		i = (i + 1) % p.Num
-		if !p.Player[i].Done {
-			p.Active = i
-		}
-	}
+	p.Active = (p.Active + 1) % p.Num
 }

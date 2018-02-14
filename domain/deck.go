@@ -8,6 +8,14 @@ type Deck struct {
 	Card []Card
 }
 
+func (d *Deck) Len() int {
+	return len(d.Card)
+}
+
+func (d *Deck) Get(i int) Card {
+	return d.Card[i]
+}
+
 func (d *Deck) Draw() Card {
 	deck := d.Card
 	if len(deck) == 0 {
