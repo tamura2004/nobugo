@@ -35,5 +35,5 @@ func (u UI) Select(actions []domain.Action) {
 		fmt.Printf("%3d: %s\n", i+1, action.Msg)
 	}
 	n := u.Num(1, len(actions), "")
-	actions[n].Do()
+	actions[n-1].Do()
 }
