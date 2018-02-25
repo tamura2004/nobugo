@@ -61,3 +61,11 @@ func (d *Deck) Each(f func(c Card)) {
 		f(d.Card[i])
 	}
 }
+
+func (d *Deck) Names() []string {
+	names := []string{}
+	d.Each(func(c Card) {
+		names = append(names, c.Name)
+	})
+	return names
+}

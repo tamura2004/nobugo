@@ -48,3 +48,11 @@ func NewPool(c Color, n int) Pool {
 	}
 	return pool
 }
+
+func (p *Pool) Names() []string {
+	names := []string{}
+	for _, d := range *p {
+		names = append(names, d.Name())
+	}
+	return names
+}

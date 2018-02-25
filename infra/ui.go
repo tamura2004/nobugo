@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/peterh/liner"
 	"github.com/tamura2004/nobugo/domain"
+	"os"
 )
 
 type UI struct{}
@@ -11,7 +12,10 @@ type UI struct{}
 func (UI) Pause(msg string) {
 	l := liner.NewLiner()
 	defer l.Close()
-	l.Prompt(msg)
+	_, err := l.Prompt(msg)
+	if err != nil {
+		os.Exit(0)
+	}
 }
 
 func (UI) MsgBox(msg string) {

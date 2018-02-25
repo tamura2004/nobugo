@@ -4,20 +4,22 @@ type Party struct {
 	Num    int
 	Active int
 	Player []Player
+	Printer
+}
+
+var PartyFactory interface {
+	Create(int) *Party
+}
+
+func NewParty(n int) *Party {
+	return &Party{
+		Num:    n,
+		Active: 0,
+		Player: make([]Player, n),
+	}
 }
 
 type Work func(*Player)
-
-func NewParty(n int) Party {
-	party := Party{
-		Num:    n,
-		Active: 0,
-	}
-	for i := 0; i < n; i++ {
-		party.Player = append(party.Player, NewPlayer(i))
-	}
-	return party
-}
 
 func (p *Party) Each(f Work) {
 	for i := 0; i < p.Num; i++ {

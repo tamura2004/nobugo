@@ -1,18 +1,26 @@
 package usecase
 
 import (
-	"github.com/tamura2004/nobugo/usecase/port"
+	"github.com/tamura2004/nobugo/domain"
 )
 
-var step Step
-var gameOver bool
+var (
+	step     Step
+	gameOver bool
+	Party    *domain.Party
+	Board    *domain.Board
+	Castle   domain.Deck
+	Samurai  domain.Deck
+)
 
 func Run() {
 	open()
+
 	for !gameOver {
 		step.next()
-		port.Party.Print()
-		port.Board.Print()
+		Board.Print()
+		Party.Print()
+		UI.Pause("next")
 	}
 	close()
 }

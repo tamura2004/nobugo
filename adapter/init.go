@@ -1,13 +1,10 @@
 package adapter
 
 import (
-	"github.com/tamura2004/nobugo/usecase"
-	"github.com/tamura2004/nobugo/usecase/port"
+	"github.com/tamura2004/nobugo/domain"
 )
 
 func Init() {
-	port.Party = &Party{}
-	port.Board = &Party{}
-
-	usecase.Init()
+	domain.PartyFactory = partyFactory(NewParty)
+	domain.BoardFactory = boardFactory(NewBoard)
 }

@@ -1,6 +1,9 @@
 package usecase
 
-import "strconv"
+import (
+	"fmt"
+	"strconv"
+)
 
 type Step int
 
@@ -12,16 +15,24 @@ const (
 	CHECK
 )
 
-var actions = map[Step]func(){
-	PREPARE: prepare,
-	MARCH:   march,
-	EMPLOY:  employ,
-	BATTLE:  battle,
-	CHECK:   check,
+func (s *Step) next() {
+	fmt.Println(*s)
+	switch *s {
+	case PREPARE:
+		prepare()
+	case MARCH:
+		march()
+	case EMPLOY:
+		employ()
+	case BATTLE:
+		battle()
+	case CHECK:
+		check()
+	}
+	s.Inc()
 }
 
-func (s *Step) next() {
-	actions[*s]()
+func (s *Step) Inc() {
 	step = *s
 	*s = Step((step + 1) % 5)
 }

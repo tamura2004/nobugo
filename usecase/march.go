@@ -3,15 +3,13 @@ package usecase
 import (
 	"fmt"
 	"github.com/tamura2004/nobugo/domain"
-	"github.com/tamura2004/nobugo/domain/entity"
-	"github.com/tamura2004/nobugo/usecase/port"
 )
 
 func march() {
 	// 開始プレイヤーからスタート
 	// 出目を一つ選んで投票ボックスに置く
 	// 次のプレイヤーへ
-	entity.Party.EachHasDice(func(p *domain.Player) {
+	Party.EachHasDice(func(p *domain.Player) {
 		// ダイスを残しているプレイヤーは全てのダイスを振る
 		p.Roll()
 
@@ -36,6 +34,6 @@ func march() {
 				}
 			}
 		})
-		port.Input.Select(action)
+		UI.Select(action)
 	})
 }
