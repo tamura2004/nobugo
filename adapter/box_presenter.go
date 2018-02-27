@@ -5,18 +5,15 @@ import (
 	"strconv"
 )
 
-type BoxPresenter struct {
-	*domain.Box
-}
+type BoxPresenter domain.Box
 
-func (p BoxPresenter) Map() map[string][]string {
-	b := p.Box
+func (b BoxPresenter) Map() map[string][]string {
 	m := make(map[string][]string)
 
 	m["番号"] = []string{strconv.Itoa(b.Num + 1)}
 	m["名称"] = []string{domain.BoxName(b.Num)}
 	m["カード"] = b.Deck.Names()
-	m["ダイス"] = b.Pool.Names()
+	m["ダイス"] = PoolPresenter(*b.Pool).Names()
 
 	return m
 }

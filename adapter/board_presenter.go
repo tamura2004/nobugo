@@ -4,9 +4,7 @@ import (
 	"github.com/tamura2004/nobugo/domain"
 )
 
-type BoardPresenter struct {
-	*domain.Board
-}
+type BoardPresenter domain.Board
 
 func (p BoardPresenter) Header() []string {
 	return []string{"番号", "名称", "カード", "ダイス"}
@@ -15,14 +13,14 @@ func (p BoardPresenter) Header() []string {
 func (p BoardPresenter) Encode() Dic {
 	dic := Dic{}
 
-	for _, box := range p.Board.Box {
-		b := BoxPresenter{&box}
+	for _, box := range p {
+		b := BoxPresenter(box)
 		dic = append(dic, b.Map())
 
 	}
 	return dic
 }
 
-func (p BoardPresenter) Print() {
-	Print(p)
+func BoardPrint(b domain.Board) {
+	Print(BoardPresenter(b))
 }

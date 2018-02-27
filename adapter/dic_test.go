@@ -1,7 +1,7 @@
 package adapter_test
 
 import (
-	"github.com/tamura2004/nobugo/domain"
+	"github.com/tamura2004/nobugo/adapter"
 	"testing"
 )
 

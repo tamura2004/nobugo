@@ -13,12 +13,12 @@ func prepare() {
 
 	// 投票カード１，２に武将を2枚ずつ置く
 	for i := 0; i < 2; i++ {
-		Board.Box[i].Deck.Bottom(Samurai.Draw())
-		Board.Box[i].Deck.Bottom(Samurai.Draw())
+		Board[i].Deck.Bottom(Samurai.Draw())
+		Board[i].Deck.Bottom(Samurai.Draw())
 	}
 
 	// 投票カード３～６に城カードを１枚ずつ置く
 	for i := 2; i < 6; i++ {
-		Board.Box[i].Deck.Bottom(Castle.Draw())
+		Board[i].Deck.Bottom(Castle.Draw())
 	}
 }

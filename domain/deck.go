@@ -1,9 +1,5 @@
 package domain
 
-import (
-	"math/rand"
-)
-
 type Deck struct {
 	Card []Card
 }
@@ -42,7 +38,7 @@ func (d *Deck) ShuffleN(n int) {
 		n = len(deck)
 	}
 	for i := 1; i < n-1; i++ {
-		j := rand.Intn(i + 1)
+		j := Rand.Intn(i + 1)
 		deck[i], deck[j] = deck[j], deck[i]
 	}
 	d.Card = deck
@@ -68,4 +64,8 @@ func (d *Deck) Names() []string {
 		names = append(names, c.Name)
 	})
 	return names
+}
+
+func NewDeck() *Deck {
+	return &Deck{}
 }

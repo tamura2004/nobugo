@@ -1,10 +1,15 @@
 package domain
 
-type Board struct {
-	Box [6]Box
-	Printer
+type Board [6]Box
+
+func NewBoard() *Board {
+	b := Board{}
+	for i := 0; i < 6; i++ {
+		b[i] = NewBox(i)
+	}
+	return &b
 }
 
-var BoardFactory interface {
-	Create() *Board
+func (b *Board) GetPool(n int) *Pool {
+	return b[n].Pool
 }

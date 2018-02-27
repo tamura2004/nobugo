@@ -6,6 +6,18 @@ func (p *Pool) Add(d Dice) {
 	*p = append(*p, d)
 }
 
+func (p *Pool) Move(dst *Pool, n int) {
+	src := Pool{}
+	for _, dice := range *p {
+		if dice.Num == n {
+			dst.Add(dice)
+		} else {
+			src.Add(dice)
+		}
+	}
+	*p = src
+}
+
 func (p *Pool) Append(o Pool) {
 	for i := 0; i < len(o); i++ {
 		p.Add(o[i])
@@ -37,22 +49,27 @@ func (p Pool) Replace(x, y int) {
 	for i := 0; i < len(p); i++ {
 		if p[i].Num == x {
 			p[i].Num = y
+			return
 		}
 	}
 }
 
-func NewPool(c Color, n int) Pool {
-	pool := Pool{}
+func NewPool(c Color, n int) *Pool {
+	pool := &Pool{}
 	for i := 0; i < n; i++ {
-		pool = append(pool, NewDice(c))
+		*pool = append(*pool, NewDice(c))
 	}
 	return pool
 }
 
-func (p *Pool) Names() []string {
-	names := []string{}
+func (p *Pool) ToMap() map[int]int {
+	m := make(map[int]int)
 	for _, d := range *p {
-		names = append(names, d.Name())
+		m[d.Num]++
 	}
-	return names
+	return m
+}
+
+func NewEmptyPool() *Pool {
+	return &Pool{}
 }

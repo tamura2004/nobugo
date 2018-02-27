@@ -4,19 +4,18 @@ type Party struct {
 	Num    int
 	Active int
 	Player []Player
-	Printer
-}
-
-var PartyFactory interface {
-	Create(int) *Party
 }
 
 func NewParty(n int) *Party {
-	return &Party{
+	p := &Party{
 		Num:    n,
 		Active: 0,
 		Player: make([]Player, n),
 	}
+	for i := 0; i < n; i++ {
+		p.Player[i] = NewPlayer(i)
+	}
+	return p
 }
 
 type Work func(*Player)
@@ -28,11 +27,16 @@ func (p *Party) Each(f Work) {
 }
 
 func (p *Party) EachHasDice(f Work) {
-	for pl := p.TurnPlayer(); p.Done(); p.Next() {
-		if pl.NoDice() {
+	for {
+		if p.Done() {
+			return
+		}
+		player := p.TurnPlayer()
+		if player.NoDice() {
 			continue
 		}
-		f(pl)
+		f(player)
+		p.Next()
 	}
 }
 

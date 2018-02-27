@@ -17,6 +17,7 @@ func ExampleSamuraiDeckLoad() {
 	//     Name:    "弥助",
 	//     Ability: 1,
 	//     Power:   {1, 2, 6},
+	//     Done:    false,
 	// }
 }
 
@@ -32,5 +33,6 @@ func ExampleCastleDeckLoad() {
 	//     Name:    "法王庁",
 	//     Ability: 0,
 	//     Power:   {1, 1, 1},
+	//     Done:    false,
 	// }
 }

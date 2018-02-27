@@ -35,6 +35,15 @@ func (UI) Num(min, max int, msg string) int {
 }
 
 func (u UI) Select(actions []domain.Action) {
+	if len(actions) == 0 {
+		return
+	}
+
+	if len(actions) == 1 {
+		actions[0].Do()
+		return
+	}
+
 	for i, action := range actions {
 		fmt.Printf("%3d: %s\n", i+1, action.Msg)
 	}

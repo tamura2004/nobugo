@@ -7,16 +7,16 @@ import (
 func open() {
 	// プレイヤー人数を決める
 	n := UI.Num(3, 6, "プレイヤー人数を入力して下さい")
-	Party = domain.PartyFactory.Create(n)
-	Board = domain.BoardFactory.Create()
+	Party = domain.NewParty(n)
+	Board = domain.NewBoard()
 
 	// デッキをシャッフル
 	Samurai.Shuffle()
 	Castle.Shuffle()
 
 	// 各プレイヤーに武将カードを1枚ずつ配る
-	Party.Each(func(player *domain.Player) {
+	Party.Each(func(p *domain.Player) {
 		card := Samurai.Draw()
-		player.Samurai.Bottom(card)
+		p.Samurai.Bottom(card)
 	})
 }

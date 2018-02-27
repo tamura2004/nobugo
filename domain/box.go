@@ -3,19 +3,21 @@ package domain
 type Box struct {
 	Name string
 	Num  int
-	Deck
-	Pool
+	*Deck
+	*Pool
 }
 
 func NewBox(n int) Box {
 	return Box{
 		Name: BoxName(n),
 		Num:  n,
+		Deck: NewDeck(),
+		Pool: NewEmptyPool(),
 	}
 }
 
 func BoxName(n int) string {
-	if n <= 2 {
+	if n < 2 {
 		return "調略"
 	}
 	return "合戦"
