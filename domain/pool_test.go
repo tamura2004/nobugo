@@ -11,7 +11,7 @@ func init() {
 }
 
 func TestNewPool(t *testing.T) {
-	p := domain.NewPool(domain.RED, 10)
+	p := *domain.NewPool(domain.RED, 10)
 	for i := 0; i < 10; i++ {
 		got := p[i].Color
 		want := domain.RED
@@ -23,7 +23,7 @@ func TestNewPool(t *testing.T) {
 }
 
 func TestPoolRoll(t *testing.T) {
-	p := domain.NewPool(domain.RED, 3)
+	p := *domain.NewPool(domain.RED, 3)
 	domain.Rand.Seed(0)
 	p.Roll() // [1,2,3]
 
@@ -35,14 +35,14 @@ func TestPoolRoll(t *testing.T) {
 }
 
 func TestPoolMove(t *testing.T) {
-	src := domain.NewPool(domain.RED, 3)
+	src := *domain.NewPool(domain.RED, 3)
 	domain.Rand.Seed(0)
 	src.Roll() // [1,2,3]
 
 	dst := domain.NewPool(domain.RED, 3)
 	dst.Roll() // [4,5,6]
 
-	src.Move(&dst, 2) // [1,3] [4,5,6,2]
+	src.Move(dst, 2) // [1,3] [4,5,6,2]
 
 	cases := []struct {
 		i int
@@ -55,7 +55,7 @@ func TestPoolMove(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		got := dst[c.i].Num
+		got := (*dst)[c.i].Num
 		if got != c.v {
 			t.Errorf("bad pool move, want %v got %v", c.v, got)
 		}
@@ -63,7 +63,7 @@ func TestPoolMove(t *testing.T) {
 }
 
 func TestPoolReplace(t *testing.T) {
-	p := domain.NewPool(domain.RED, 3)
+	p := *domain.NewPool(domain.RED, 3)
 	domain.Rand.Seed(0)
 	p.Roll()        // [1,2,3]
 	p[0].Num = 2    // [2,2,3]
@@ -77,7 +77,7 @@ func TestPoolReplace(t *testing.T) {
 }
 
 func TestPoolInclude(t *testing.T) {
-	p := domain.NewPool(domain.RED, 3)
+	p := *domain.NewPool(domain.RED, 3)
 	domain.Rand.Seed(0)
 	p.Roll() // [1,2,3]
 

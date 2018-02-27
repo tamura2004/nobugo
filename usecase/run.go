@@ -18,8 +18,8 @@ func Run() {
 
 	for !gameOver {
 		step.next()
-		BoardPrint(*Board)
-		PartyPrint(*Party)
+		Board.Print()
+		Party.Print()
 		UI.Pause("next")
 	}
 	close()

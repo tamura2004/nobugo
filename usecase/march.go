@@ -21,17 +21,16 @@ func march() {
 
 		// ダイスを残しているプレイヤーは全てのダイスを振る
 		player.Roll()
-		BoardPrint(*Board)
-		PartyPrint(*Party)
 
 		// 武将能力を好きなだけ使用する
 		UI.Select(player.ChangeDiceActions())
-		PartyPrint(*Party)
+		Board.Print()
+		Party.Print()
 
 		// 出目を一つ選んで投票ボックスに置く
 		UI.Select(player.PutDiceActions(Board))
-		BoardPrint(*Board)
-		PartyPrint(*Party)
+		Board.Print()
+		Party.Print()
 
 		// 次のプレイヤーへ
 		Party.Next()

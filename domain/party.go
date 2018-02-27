@@ -6,6 +6,12 @@ type Party struct {
 	Player []Player
 }
 
+var PartyPrint func(Party)
+
+func (p Party) Print() {
+	PartyPrint(p)
+}
+
 func NewParty(n int) *Party {
 	p := &Party{
 		Num:    n,

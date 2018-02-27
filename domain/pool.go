@@ -2,6 +2,26 @@ package domain
 
 type Pool []Dice
 
+func NewPool(c Color, n int) *Pool {
+	pool := &Pool{}
+	for i := 0; i < n; i++ {
+		*pool = append(*pool, NewDice(c))
+	}
+	return pool
+}
+
+func NewEmptyPool() *Pool {
+	return &Pool{}
+}
+
+func (p *Pool) ToMap() map[int]int {
+	m := make(map[int]int)
+	for _, d := range *p {
+		m[d.Num]++
+	}
+	return m
+}
+
 func (p *Pool) Add(d Dice) {
 	*p = append(*p, d)
 }
@@ -52,24 +72,4 @@ func (p Pool) Replace(x, y int) {
 			return
 		}
 	}
-}
-
-func NewPool(c Color, n int) *Pool {
-	pool := &Pool{}
-	for i := 0; i < n; i++ {
-		*pool = append(*pool, NewDice(c))
-	}
-	return pool
-}
-
-func (p *Pool) ToMap() map[int]int {
-	m := make(map[int]int)
-	for _, d := range *p {
-		m[d.Num]++
-	}
-	return m
-}
-
-func NewEmptyPool() *Pool {
-	return &Pool{}
 }

@@ -20,8 +20,8 @@ func main() {
 	adapter.TableDriver = infra.Table{}
 
 	// 出力portの初期化
-	usecase.PartyPrint = adapter.PartyPrint
-	usecase.BoardPrint = adapter.BoardPrint
+	domain.PartyPrint = adapter.PartyPrint
+	domain.BoardPrint = adapter.BoardPrint
 
 	// Run
 	usecase.Run()

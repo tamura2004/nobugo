@@ -10,6 +10,12 @@ func NewBoard() *Board {
 	return &b
 }
 
+var BoardPrint func(Board)
+
+func (b Board) Print() {
+	BoardPrint(b)
+}
+
 func (b *Board) GetPool(n int) *Pool {
 	return b[n].Pool
 }
