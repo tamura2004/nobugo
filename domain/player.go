@@ -70,7 +70,7 @@ func (p *Player) PutDiceAction(n int, b *Board) Action {
 	return Action{
 		Msg: fmt.Sprintf("put dice [%d] to board", n),
 		Do: func() {
-			p.Pool.Move(b.GetPool(n), n)
+			p.Pool.Move(b.GetPool(n-1), n)
 		},
 	}
 }

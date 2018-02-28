@@ -63,3 +63,13 @@ func (p *Party) Done() bool {
 func (p *Party) Next() {
 	p.Active = (p.Active + 1) % p.Num
 }
+
+func (p *Party) GetPlayerByColor(c Color) *Player {
+	for i := 0; i < p.Num; i++ {
+		pl := p.Player[i]
+		if pl.Color == c {
+			return &pl
+		}
+	}
+	return &Player{}
+}

@@ -19,3 +19,19 @@ func (b Board) Print() {
 func (b *Board) GetPool(n int) *Pool {
 	return b[n].Pool
 }
+
+func (b *Board) Pool() []*Pool {
+	p := []*Pool{}
+	for i := 0; i < 6; i++ {
+		p = append(p, b[i].Pool)
+	}
+	return p
+}
+
+func (b *Board) Deck() []*Deck {
+	d := []*Deck{}
+	for i := 0; i < 6; i++ {
+		d = append(d, b[i].Deck)
+	}
+	return d
+}

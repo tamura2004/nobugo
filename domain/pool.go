@@ -73,3 +73,25 @@ func (p Pool) Replace(x, y int) {
 		}
 	}
 }
+
+func (p Pool) Winner() Color {
+	m := make(map[Color]int)
+	for i := 0; i < len(p); i++ {
+		c := p[i].Color
+		m[c]++
+	}
+
+	var (
+		color Color
+		count int
+	)
+
+	for k, v := range m {
+		if count <= v {
+			count = v
+			color = k
+		}
+	}
+
+	return color
+}
