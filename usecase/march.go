@@ -16,6 +16,7 @@ func march() {
 		// ダイスの無いプレイヤーは飛ばす
 		player := Party.TurnPlayer()
 		if player.NoDice() {
+			Party.Next()
 			continue
 		}
 

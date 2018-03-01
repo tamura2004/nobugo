@@ -102,3 +102,17 @@ func TestPoolInclude(t *testing.T) {
 		}
 	}
 }
+
+func TestPoolWinner(t *testing.T) {
+	p := domain.Pool{}
+	p.Add(domain.NewDice(domain.BLUE))
+	p.Add(domain.NewDice(domain.RED))
+	p.Add(domain.NewDice(domain.RED))
+	p.Add(domain.NewDice(domain.BLUE))
+
+	got := p.Winner()
+	want := domain.BLUE
+	if got != want {
+		t.Errorf("bad pool winner got %s want %s", got, want)
+	}
+}

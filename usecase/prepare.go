@@ -11,9 +11,8 @@ func prepare() {
 		p.Pool = domain.NewPool(p.Color, 3+p.DiceBonus())
 	})
 
-	// 投票カード１，２に武将を2枚ずつ置く
+	// 投票カード１，２に武将カードを1枚ずつ置く
 	for i := 0; i < 2; i++ {
-		Board[i].Deck.Bottom(Samurai.Draw())
 		Board[i].Deck.Bottom(Samurai.Draw())
 	}
 

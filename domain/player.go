@@ -7,16 +7,18 @@ import (
 type Player struct {
 	Color
 	*Pool
-	Samurai Deck
-	Castle  Deck
+	Samurai *Deck
+	Castle  *Deck
 }
 
 type Effect func(*Card)
 
 func NewPlayer(n int) Player {
 	return Player{
-		Color: Color(n),
-		Pool:  NewEmptyPool(),
+		Color:   Color(n),
+		Pool:    NewEmptyPool(),
+		Samurai: NewDeck(),
+		Castle:  NewDeck(),
 	}
 }
 
